@@ -17,8 +17,6 @@ using std::string;
     return ret;
   }
 
-  bool Variable :: match(Variable var){ return false;}
-
   string Variable :: setvalue(string v){
     _value = v;
   }

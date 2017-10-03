@@ -11,7 +11,6 @@ public:
   string value();
   bool match( Atom atom );
   bool match(Number num);
-  bool match(Variable var);
   string setvalue(string v);
   bool setassignable(bool b);
   bool getassignable();
