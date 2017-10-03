@@ -6,8 +6,7 @@ using std::string;
 
 Atom :: Atom (string s):_symbol(s) {}
 	string Atom :: symbol(){return _symbol;}
-	void Atom :: match(Atom at) {}
-	bool Atom :: match(Number num){return false;};
+	bool Atom :: match(Atom at) {return false;}
 	bool Atom :: match(Variable &var){
   	bool ret = var.getassignable();
     if(ret || var.value()==_symbol){
@@ -17,3 +16,4 @@ Atom :: Atom (string s):_symbol(s) {}
     }
     return ret;
   }
+	bool Atom :: match(Number num){return false;}
