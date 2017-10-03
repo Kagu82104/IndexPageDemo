@@ -12,7 +12,7 @@ public:
 	string symbol();
 	bool match(Number num);
 	bool match(Variable &var);
-  bool match(Atom at);
+  void match(Atom at);
 private:
 	bool _assignable = true;
 	const string _symbol;
