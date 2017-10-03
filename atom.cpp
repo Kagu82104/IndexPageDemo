@@ -6,16 +6,14 @@ using std::string;
 
 Atom :: Atom (string s):_symbol(s) {}
 	string Atom :: symbol(){return _symbol;}
+	bool Atom :: match(Atom at) {}
 	bool Atom :: match(Number num){return false;};
 	bool Atom :: match(Variable &var){
   	bool ret = var.getassignable();
-    if(ret || var.value()==""){
+    if(ret || var.value()==_symbol){
       var.setvalue(_symbol) ;
       var.setassignable(false);
 			return true;
     }
-		else if(_symbol==var.value()){
-			return true;
-		}
     return ret;
   }
