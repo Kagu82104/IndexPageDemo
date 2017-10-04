@@ -10,7 +10,7 @@ using std::string;
   bool Variable :: match(Number num){
     bool ret = _varassignable;
     if(ret || _value==""){
-      _value = std::to_string(num.value());
+      _value = num.value();
       _varassignable = false;
       return true;
     }
