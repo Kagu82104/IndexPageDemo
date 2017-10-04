@@ -9,7 +9,7 @@ class Variable;
 class Number {
 public:
   Number(int v);
-  int value();
+  string value();
   string symbol();
   bool match(Number num);
   bool match(Atom at);
