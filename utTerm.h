@@ -7,7 +7,7 @@ using namespace std;
 //test Number.value()
 TEST (Number,ctor) {
 	Number num(25);
-	//ASSERT_EQ("25",num.value());
+	ASSERT_EQ("25",num.value());
 }
 //test Number.symbol()
 TEST (Number, symbol) {
@@ -43,7 +43,7 @@ TEST (Number, matchSuccessToVar) {
   EXPECT_TRUE(num.match(var));
 
 }
-/*
+
 //?- tom=25.
 //false.
 TEST (Atom, matchFailureDiffConstant) {
@@ -123,5 +123,5 @@ TEST(Var, reAssignTheSameAtom){
 	Atom tom("tom");
 	ASSERT_TRUE(var.match(tom));
 	ASSERT_TRUE(var.match(tom));
-}*/
+}
 #endif
