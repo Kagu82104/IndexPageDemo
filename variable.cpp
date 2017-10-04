@@ -9,7 +9,7 @@ using std::string;
 
   bool Variable :: match(Number num){
     bool ret = _varassignable;
-    if(ret || _value==""){
+    if(ret || _value==num.value()){
       _value = num.value();
       _varassignable = false;
       return true;
@@ -26,12 +26,9 @@ using std::string;
 
   bool Variable :: match( Atom atom ){
     bool ret = _varassignable;
-    if(ret || _value==""){
+    if(ret || _value==atom.symbol()){
       _value = atom.symbol();
       _varassignable = false;
-      return true;
-    }
-    else if(_value==atom.symbol()){
       return true;
     }
     return ret;
