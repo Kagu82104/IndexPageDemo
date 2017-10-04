@@ -9,13 +9,10 @@ Atom :: Atom (string s):_symbol(s) {}
 	bool Atom :: match(Number num){return false;};
 	bool Atom :: match(Variable &var){
   	bool ret = var.getassignable();
-    if(ret || var.value()==""){
+    if(ret || var.value()==var.value()){
       var.setvalue(_symbol) ;
       var.setassignable(false);
 			return true;
     }
-		else if(_symbol==var.value()){
-			return true;
-		}
     return ret;
   }
