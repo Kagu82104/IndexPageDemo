@@ -12,8 +12,8 @@ Number :: Number(int v):_value(std::to_string(v)),_symbol(std::to_string(v)){}
   bool Number :: match(Variable &var){
   	bool ret = var.getassignable();
   	if(ret ||(var.value()==_value)){
-      var.setvalue(_value);
-      var.setassignable(false);
+      //var.setvalue(_value);
+      //var.setassignable(false);
   		return true;
   	}
   	return ret;
