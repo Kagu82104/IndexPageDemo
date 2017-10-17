@@ -1,15 +1,27 @@
 #ifndef NUMBER_H
 #define NUMBER_H
+#include <sstream>
 #include <string>
-
+#include "term.h"
+#include "variable.h"
+#include "struct.h"
 using std::string;
-class Number {
+class Number:public Term {
 public:
-  Number(int v);
-  int value();
-  string symbol();
+  Number(double v):_value(v){};
+  string value(){
+    std::stringstream ss;
+    ss << _value;
+    return ss.str();
+  };
+  string symbol() const {
+    std::stringstream ss;
+    ss << _value;
+    return ss.str();
+  };
+
 private:
-	int _value;
+	double _value;
 	const string _symbol;
 };
 
