@@ -2,8 +2,8 @@
 #define UTVARIABLE_H
 #include "variable.h"
 #include "number.h"
-#include "term.h"
 #include "atom.h"
+#include "struct.h"
 
 TEST(Variable, constructor){
   Variable X("X");
@@ -85,7 +85,10 @@ TEST (Variable, num1_to_varZ_to_varY_to_varX) {
   Variable Z("Z");
   Number num(1);
   X.match(Y);
+  //EXPECT_EQ("Y",X.value());
   Y.match(Z);
+  //EXPECT_EQ("Z",Y.value());
+  //EXPECT_EQ("Z",X.value());
   Z.match(num);
   EXPECT_EQ("1",X.value());
   EXPECT_EQ("1",Y.value());
@@ -95,6 +98,16 @@ TEST (Variable, num1_to_varZ_to_varY_to_varX) {
 // ?- X=Y, X=Z, Z=1
 // X=1, Y=1, Z=1
 TEST (Variable, num1_to_varZ_to_varX_and_varY_to_varX) {
+  Variable X("X");
+  Variable Y("Y");
+  Variable Z("Z");
+  Number num(1);
+  X.match(Y);
+  X.match(Z);
+  Z.match(num);
+  EXPECT_EQ("1",X.value());
+  EXPECT_EQ("1",Y.value());
+  EXPECT_EQ("1",Z.value());
 
 }
 
@@ -104,7 +117,13 @@ TEST (Variable, num1_to_varZ_to_varX_and_varY_to_varX) {
 // Then #symbol() of Y should return "Y"
 // And #value() of Y should return "s(X)"
 TEST (Variable, Struct1) {
-
+  Variable X("X");
+  Variable Y("Y");
+  std::vector<Term *> v ={&X};
+  Struct s(Atom("s"),v);
+  Y.match(s);
+  EXPECT_EQ("Y",Y.symbol());
+  EXPECT_EQ("s(X)",Y.value());
 }
 
 // Give there is a Struct s contains Variable X
@@ -114,7 +133,15 @@ TEST (Variable, Struct1) {
 // Then #symbol() of Y should return "Y"
 // And #value() of Y should return "s(teddy)"
 TEST (Variable, Struct2) {
-
+  Variable X("X");
+  Variable Y("Y");
+  Atom teddy("teddy");
+  std::vector<Term *> v ={&X};
+  Struct s(Atom("s"),v);
+  Y.match(s);
+  X.match(teddy);
+  EXPECT_EQ("Y",Y.symbol());
+  EXPECT_EQ("s(teddy)",Y.value());
 }
 
 #endif
