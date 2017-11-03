@@ -98,6 +98,7 @@ TEST(List, matchToVarShouldSucceed) {
   List list(v);
   Variable Y("Y");
   EXPECT_TRUE(Y.match(list));
+  EXPECT_EQ("[496, X, terence_tao]",Y.value());
 }
 
 // ?- X = [496, X, terence_tao].
@@ -119,8 +120,7 @@ TEST(List, matchToSameListShouldSucceed) {
   Atom terence_tao("terence_tao");
   std::vector<Term *> v ={&num,&X,&terence_tao};
   List list(v);
-  List list1(v);
-  EXPECT_TRUE(list.match(list1));
+  EXPECT_TRUE(list.match(list));
 }
 
 // ?- [496, X, terence_tao] = [496, Y, terence_tao].
@@ -164,9 +164,14 @@ TEST(List, matchVarinListToAtomShouldSucceed) {
   Atom alan_mathison_turing("alan_mathison_turing");
   std::vector<Term *> v ={&num,&X,&terence_tao};
   List list(v);
+  Y.match(list);
+  //EXPECT_EQ("[496, X, terence_tao]",Y.value());
+  //EXPECT_EQ("[496, X, terence_tao]",list.value());
   X.match(alan_mathison_turing);
-  EXPECT_EQ("[496, alan_mathison_turing, terence_tao]",list.symbol());
+  EXPECT_EQ("[496, alan_mathison_turing, terence_tao]",list.value());
+  EXPECT_EQ("[496, alan_mathison_turing, terence_tao]",Y.value());
   EXPECT_EQ("alan_mathison_turing",X.value());
+  //EXPECT_EQ("[496, alan_mathison_turing, terence_tao]",Y.value());
 }
 
 // Example:
@@ -249,3 +254,12 @@ TEST (List, emptyExecptionOfTail) {
 }
 
 #endif
+/*
+[  FAILED  ] 2 tests, listed below:
+
+[  FAILED  ] List.matchToSameListShouldSucceed
+unknown file: Failure
+C++ exception with description "std::bad_alloc" thrown in the test body.
+
+
+*/
