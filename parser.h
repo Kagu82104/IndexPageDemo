@@ -14,8 +14,8 @@ class Parser{
 public:
   Parser(Scanner scanner) : _scanner(scanner){}
   Term* createTerm(){
-
     int token = _scanner.nextToken();
+    _scanner.skipLeadingWhiteSpace();
     if(token == VAR){
       return new Variable(symtable[_scanner.tokenValue()].first);
     }else if(token == NUMBER){
@@ -33,11 +33,20 @@ public:
         }
     }
     else if(token =='['){
-      if(_scanner.nextToken()==']'){
-        return new List;
+      if (_scanner.currentChar() != ']'){
+          vector<Term *> terms = getArgs();
+          if (_currentToken == ']'){
+            return new List(terms);
+          }
+          else{
+            throw std::string("unexpected token");
+          }
       }
-      vector<Term*> terms=getArgs();
-        return new List(terms);
+      else if(_scanner.currentChar() == ']'){
+          _scanner.nextToken();
+          vector<Term *> terms = {};
+          return new List(terms);
+        }
     }
     else{
       return nullptr;

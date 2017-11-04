@@ -1,5 +1,6 @@
 #include "struct.h"
 #include "list.h"
+#include <iostream>
   Struct :: Struct (Atom const & name, std::vector<Term *> v):_name(name), _args(v) {}
   Term * Struct :: args(int index) { return _args[index]; }
   Atom const & Struct :: name() { return _name; }
@@ -42,4 +43,9 @@
   //
   //  }
     return false;
-  }
+  };
+  int Struct :: arity(){
+    // return _args.size();
+    std::cout << _args.size();
+    return 0;
+  };

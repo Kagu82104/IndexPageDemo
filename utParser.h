@@ -169,14 +169,25 @@ TEST_F(ParserTest, parseListOfListsAndStruct) {
 // Then it should return a List.
 // And #symbol() of List should return "[1, 2]".
 TEST_F(ParserTest, parseList) {
-
+  Scanner scanner("   [1, 2]");
+  Parser parser(scanner);
+  ASSERT_EQ("[1, 2]", parser.createTerm()->symbol());
 }
 
 // Given there is string: "[1,2)" in scanner.
 // When parser parses all terms via scanner.
 // Then it should return a string: "unexpected token" as exception.
 TEST_F(ParserTest, illegal1) {
-
+  Scanner scanner("[1,2)");
+  Parser parser(scanner);
+  try
+  {
+    parser.createTerm()->symbol();
+  }
+  catch(string exception)
+  {
+    EXPECT_EQ("unexpected token",exception);
+  }
 }
 
 // Given there is string: ".(1,[])" in scanner.
@@ -186,8 +197,24 @@ TEST_F(ParserTest, illegal1) {
 // And #symbol() of Struct should return ".(1, [])".
 // And the first term should be number: "1", the second term should be another Strcut: "[]".
 TEST_F(ParserTest, ListAsStruct) {
-
+  Scanner scanner(".(1)");
+  Parser parser(scanner);
+  ASSERT_EQ(".(1)", parser.createTerm()->symbol());
 }
+// TEST_F(ParserTest, ListAsStruct) {
+//   Scanner scanner(".(1,[])");
+//   Parser parser(scanner);
+//   Struct * ps = dynamic_cast<Struct *>(parser.createTerm());
+//   if(ps){
+//        ASSERT_EQ(2, ps -> arity());
+//   }else{
+//       ASSERT_EQ(2, 1);
+//   }
+//
+//   // EXPECT_EQ(".(1, [])", ps -> symbol());
+//   // EXPECT_EQ("1", ps -> args(0) -> symbol());
+//   // EXPECT_EQ("[]", ps -> args(1) -> symbol());
+// }
 
 
 // Given there is string: ".(2,.(1,[]))" in scanner.
