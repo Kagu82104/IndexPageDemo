@@ -32,8 +32,7 @@ public:
         string s = extractVar();
         processToken<VAR>(s);
         return VAR;
-      }
-       else {
+      } else {
         _tokenValue = NONE;
         return extractChar();
       }
